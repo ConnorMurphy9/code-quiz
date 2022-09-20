@@ -10,12 +10,13 @@ button {
     margin: auto;
     background-color: rgb(134, 132, 250);
     padding: 5px;
-    border-top-left-radius: 20px;
+ 
     
 }
 
 
-#startButton {
-
-
+button#startButton {
+    color: black;
+    width: 200px;
+    height: 50px;
 }

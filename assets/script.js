@@ -12,6 +12,12 @@ var secondsLeft = 75;
 // }
 
 
+function setCorrect() {
+    win.textContent = winCounter;
+    localStorage.setItem("winCount", winCounter);
+  }
+
+
 
 // This is the timer.
 function Timer() {
@@ -24,7 +30,7 @@ function Timer() {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       // Calls function to create and append image
-      sendMessage();
+    //   sendMessage();
     }
 
   }, 1000);
@@ -34,16 +40,7 @@ function Timer() {
   
 
 
-  function setWins() {
-    win.textContent = winCounter;
-    localStorage.setItem("winCount", winCounter);
-  }
-  
-  function setLosses() {
-    lose.textContent = loseCounter;
-    localStorage.setItem("loseCount", loseCounter);
-  }
-
+ 
 
   // sendMessage(); {
 
