@@ -21,44 +21,56 @@ var allQuestions = [
 // 2
 {
 question: "Commonly used data types DO NOT include:", 
-choices: "string","booleans","alerts","numbers"},
+choices: ["string","booleans","alerts","numbers"],
+answer: "alerts"
+},
 // 2
 {
 question: "The condition in a if/else statement in enclosed within:",
-choices: "quotes", "curly brackets", "parentheses", "square brackets"},
+choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+answer: "parentheses"
+},
+
 // 3
 {
 question: "Arrays in Javascript can be used to store:", 
-choices: "numbers and strings", "other arrays", "booleans", "all of the above"},
+choices: ["numbers and strings", "other arrays", "booleans", "all of the above"],
+answer: "all of the above"
+},
 // 2
 {
 question: "String values must be enclosed within __ when being assigned to variables.", 
-choices: "commas", "curly brackets", "quotes", "parentheses"},
+choices: ["commas", "curly brackets", "quotes", "parentheses"],
+answer: "quotes"
+},
 // 3
 {
 question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-choices: "Javacript", "terminal/bash", "for loop", "console log"}
+choices: ["Javacript", "terminal/bash", "for loop", "console.log()"],
+answer: "console.log()"
+}
+
 ];
 
 
-
+// global var called index that is set to 0 by default, every time they get a question right, increment it
 
 function makeButton() {
 allQuestions[0].choices.forEach(element=> { 
   let btn = document.createElement('button');
   btn.innerHTML = element;
-  document.getElementById(container).appendChild(btn);
+  document.getElementById("container").appendChild(btn);
 });}
 
 makeButton();
 
 
 
-console.log(question1);
-console.log(question2);
-console.log(question3);
-console.log(question4);
-console.log(question5);
+// console.log(question1);
+// console.log(question2);
+// console.log(question3);
+// console.log(question4);
+// console.log(question5);
 
 
 
