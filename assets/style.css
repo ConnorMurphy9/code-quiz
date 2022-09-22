@@ -1,6 +1,13 @@
 
 
-
+#questionBox {
+    font-size: 20px;
+    color: black;
+    margin: auto;
+    display:block;
+    width: auto;
+    height: 100px;
+}
 
 
 button {
@@ -8,7 +15,7 @@ button {
     color: rgb(0, 0, 0);
     display: block;
     margin: auto;
-    background-color: rgb(134, 132, 250);
+    background-color: rgb(180, 179, 255);
     padding: 5px;
  
     

@@ -3,9 +3,11 @@ var timerElement = document.querySelector(".time");
 // Selects element by id
 var mainElement = document.getElementById("main");
 var startBtn = document.getElementById("startButton");
-var presentQuestion = document.getElementById("question");
-
-
+var displayQuestion = document.getElementById("questionBox");
+let answersCorrect = 0;
+let currentQuestionIndex = 0;
+// global var called index that is set to 0 by default, every time they get a question right, increment it
+// move through questions as it increases
 
 // var answerset1 = document.getElementById("button1");
 // var answerset2 = document.getElementById("button2");
@@ -13,10 +15,8 @@ var presentQuestion = document.getElementById("question");
 // var answerset4 = document.getElementById("button4");
 // var answerset5 = document.getElementById("button5");
 
+
 var allQuestions = [
-  
-// allQuestions[0].question;
-// allQuestions[0].choices;
 
 // 2
 {
@@ -52,78 +52,96 @@ answer: "console.log()"
 
 ];
 
+/**
+ * Asks the next question.  Clears buttons and creates new answer buttons.
+ */
+function askQuestion(questionIndex) {
+  let question = allQuestions[questionIndex];
 
-// global var called index that is set to 0 by default, every time they get a question right, increment it
+  // Display my new question text
+  document.getElementById("questionBox").textContent = question.question;
 
-function makeButton() {
-allQuestions[0].choices.forEach(element=> { 
-  let btn = document.createElement('button');
-  btn.innerHTML = element;
-  document.getElementById("container").appendChild(btn);
-});}
+  // Remove the old buttons
+  let answerButtons = document.getElementById("answerButtons");
+  answerButtons.replaceChildren();
 
-makeButton();
+  // Add the new buttons
+  question.choices.forEach(choice => {
+    let answerButton = makeAnswerButton(choice);
+    answerButtons.appendChild(answerButton);
+  });
+    
+}
+
+// 
+function makeAnswerButton(answer) {
+  let answerButton = document.createElement("button");
+  answerButton.textContent = answer;
+  answerButton.addEventListener("click", checkAnswer, false);
+  return answerButton;
+}
+
+// 
+function checkAnswer(event) {
+  let answer = event.target.textContent;
+
+  console.log(answer);
+
+  if (answer === allQuestions[currentQuestionIndex].answer) {
+    console.log("right"); 
+    answersCorrect++;
+  } else {
+    secondsLeft -= 10;
+  }
+  if (currentQuestionIndex === 4) {
+    // display high score
+  }
+  else {
+  askQuestion(++currentQuestionIndex);
+}
+}
+
+// // function for correct answer
+// function userCorrect( ) {
+//   choiceBtn.addEventListener('click', "button", function(event){
 
 
-
-// console.log(question1);
-// console.log(question2);
-// console.log(question3);
-// console.log(question4);
-// console.log(question5);
-
-
-
+// //   })
+// //   if
+//   });
 
 
 // function for wrong answer?
 // function wrongAnswer() {}
 
-function askQuestion() {
 
-
-
-}
 
 var secondsLeft = 75;
 
 
-// Define event to occur when timer ends
-// timerEnd(); {
-    
-// }
-
-// Function that will update the user's high score
-function updateCorrect() {
-    
-    win.textContent = winCounter;
-    localStorage.setItem("winCount", winCounter);
-  }
-
 startBtn.addEventListener("click", startTimer); 
 
-
+// This function starts the timer.
 function startTimer() {
-   
-
-  
     startBtn.disabled = true;
-    // startBtn.style.display = "none"; 
+    startBtn.style.display = "none"; 
     timer();
+    askQuestion(currentQuestionIndex);
+    // askQuestion?;
 }
 
 
 
 
 
-// This is the timer.
+// This is function that describes the timer.
 function timer() {
   // Sets interval in variable
   var timerInterval = setInterval(function() {
     secondsLeft--;
     timerElement.textContent = secondsLeft + " seconds left.";
 
-    if(secondsLeft === 0) {
+    if(secondsLeft <= 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       // Calls function to create and append image
@@ -137,13 +155,18 @@ function timer() {
   
 
 
- 
 
-  // sendMessage(); {
+console.log(askQuestion);
+console.log(allQuestions[0].question);
 
+// Define event to occur when timer ends
+// timerEnd/loseGame(); {
+    
 // }
 
-
-
-
-
+// Function that will update the user's high score
+// function updateCorrect() {
+    
+//     win.textContent = winCounter;
+//     localStorage.setItem("winCount", winCounter);
+//   }
