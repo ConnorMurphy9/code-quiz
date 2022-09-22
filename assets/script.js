@@ -5,10 +5,10 @@ var mainElement = document.getElementById("main");
 var startBtn = document.getElementById("startButton");
 var displayQuestion = document.getElementById("questionBox");
 var choiceBtn = document.getElementById("answerButtons")
-let currentQuestionIndex = 0;
+var currentQuestionIndex = 0;
 // global var called index that is set to 0 by default, every time they get a question right, increment it
 // move through questions as it increases
-let answersCorrect = 0;
+var answersCorrect = 0;
 
 
 var allQuestions = [
@@ -48,35 +48,40 @@ answer: "console.log()"
 ];
 
 function askQuestion() {
-  let question = allQuestions[currentQuestionIndex];
-
+  var currentQuestion = allQuestions[currentQuestionIndex];
+// if currentQuestionindex is undefined, end quiz
+  if(!currentQuestion) {
+    console.log("Ending Quiz")
+    
+    return
+  }
   // Display my new question text
-  document.getElementById("questionBox").textContent = question.question;
+  document.getElementById("questionBox").textContent = currentQuestion.question;
 
   // Remove the old buttons
-  let answerButtons = document.getElementById("answerButtons");
+  var answerButtons = document.getElementById("answerButtons");
   answerButtons.replaceChildren();
 
   // Add the new buttons
-  question.choices.forEach(choice => {
-    let answerButton = makeAnswerButton(choice);
+  currentQuestion.choices.forEach(choice =>  {
+    var answerButton = makeAnswerButton(choice);
     answerButtons.appendChild(answerButton);
   });
-    
+    // array.forEach(function(currentValue, index, arr), thisValue)
 }
 // Function to remove buttons
 function removeButtons() {
-  let answerButtons = document.getElementById("answerButtons");
+  var answerButtons = document.getElementById("answerButtons");
   answerButtons.replaceChildren();
 }
 // Function to make buttons populate to HTML
-function makeAnswerButton() {
-  allQuestions[currentQuestionIndex].choices.forEach(element=>{ 
-    let btn = document.createElement('button');
-    btn.textContent = element;
-    document.getElementById("answerButtons").appendChild(btn);
+function makeAnswerButton(choice) {
+ 
+    var btn = document.createElement('button');
+    btn.textContent = choice;
+    return btn
     
-});}
+}
 
 
 
@@ -142,9 +147,12 @@ function timer() {
   }, 1000);
 }
 
+ function test() {
+  return 2+2;
+ }
  
-  
-
+var pikachu = test();
+console.log(pikachu);
 console.log(answersCorrect);
 // askQuestion();
 // console.log(askQuestion);
@@ -161,3 +169,8 @@ console.log(answersCorrect);
 //     win.textContent = winCounter;
 //     localStorage.setItem("winCount", winCounter);
 //   }
+
+
+
+
+// When saving items in local storage you will need to retrieve the previously saved scores and combine the new score with the array of previous before the are saved back to local storage
