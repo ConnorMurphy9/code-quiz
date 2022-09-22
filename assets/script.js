@@ -4,16 +4,11 @@ var timerElement = document.querySelector(".time");
 var mainElement = document.getElementById("main");
 var startBtn = document.getElementById("startButton");
 var displayQuestion = document.getElementById("questionBox");
-let answersCorrect = 0;
+var choiceBtn = document.getElementById("answerButtons")
 let currentQuestionIndex = 0;
 // global var called index that is set to 0 by default, every time they get a question right, increment it
 // move through questions as it increases
-
-// var answerset1 = document.getElementById("button1");
-// var answerset2 = document.getElementById("button2");
-// var answerset3 = document.getElementById("button3");
-// var answerset4 = document.getElementById("button4");
-// var answerset5 = document.getElementById("button5");
+let answersCorrect = 0;
 
 
 var allQuestions = [
@@ -26,7 +21,7 @@ answer: "alerts"
 },
 // 2
 {
-question: "The condition in a if/else statement in enclosed within:",
+question: "The condition in an if/else statement is enclosed within:",
 choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
 answer: "parentheses"
 },
@@ -52,11 +47,8 @@ answer: "console.log()"
 
 ];
 
-/**
- * Asks the next question.  Clears buttons and creates new answer buttons.
- */
-function askQuestion(questionIndex) {
-  let question = allQuestions[questionIndex];
+function askQuestion() {
+  let question = allQuestions[currentQuestionIndex];
 
   // Display my new question text
   document.getElementById("questionBox").textContent = question.question;
@@ -72,49 +64,47 @@ function askQuestion(questionIndex) {
   });
     
 }
+// Function to remove buttons
+function removeButtons() {
+  let answerButtons = document.getElementById("answerButtons");
+  answerButtons.replaceChildren();
+}
+// Function to make buttons populate to HTML
+function makeAnswerButton() {
+  allQuestions[currentQuestionIndex].choices.forEach(element=>{ 
+    let btn = document.createElement('button');
+    btn.textContent = element;
+    document.getElementById("answerButtons").appendChild(btn);
+    
+});}
 
-// 
-function makeAnswerButton(answer) {
-  let answerButton = document.createElement("button");
-  answerButton.textContent = answer;
-  answerButton.addEventListener("click", checkAnswer, false);
-  return answerButton;
+
+
+function answerCheck (event) {
+  console.log(event.target.textContent);
+    if (event.target.textContent == allQuestions[currentQuestionIndex].answer) {
+      // Function for adding to score should go here?
+      answersCorrect++;
+      // Also a message saying user is correct
+
+      console.log("right");
+    } else {
+      secondsLeft = secondsLeft-10
+    }
+    currentQuestionIndex++; 
+    askQuestion();
+    
 }
 
-// 
-function checkAnswer(event) {
-  let answer = event.target.textContent;
+// Checks 
+choiceBtn.addEventListener('click', answerCheck, false, )
 
-  console.log(answer);
 
-  if (answer === allQuestions[currentQuestionIndex].answer) {
-    console.log("right"); 
-    answersCorrect++;
-  } else {
-    secondsLeft -= 10;
-  }
-  if (currentQuestionIndex === 4) {
-    // display high score
-  }
-  else {
-  askQuestion(++currentQuestionIndex);
-}
-}
+
 
 // // function for correct answer
 // function userCorrect( ) {
 //   choiceBtn.addEventListener('click', "button", function(event){
-
-
-// //   })
-// //   if
-//   });
-
-
-// function for wrong answer?
-// function wrongAnswer() {}
-
-
 
 var secondsLeft = 75;
 
@@ -126,8 +116,9 @@ function startTimer() {
     startBtn.disabled = true;
     startBtn.style.display = "none"; 
     timer();
-    askQuestion(currentQuestionIndex);
-    // askQuestion?;
+    makeAnswerButton();
+    askQuestion();
+    
 }
 
 
@@ -154,10 +145,10 @@ function timer() {
  
   
 
-
-
-console.log(askQuestion);
-console.log(allQuestions[0].question);
+console.log(answersCorrect);
+// askQuestion();
+// console.log(askQuestion);
+// console.log(allQuestions[0].question);
 
 // Define event to occur when timer ends
 // timerEnd/loseGame(); {
