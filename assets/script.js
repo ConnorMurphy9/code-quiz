@@ -1,5 +1,5 @@
 var timerElement = document.querySelector(".time");
-
+var secondsLeft = 75;
 // Selects element by id
 var mainElement = document.getElementById("main");
 var startBtn = document.getElementById("startButton");
@@ -8,7 +8,7 @@ var choiceBtn = document.getElementById("answerButtons")
 var currentQuestionIndex = 0;
 // global var called index that is set to 0 by default, every time they get a question right, increment it
 // move through questions as it increases
-var answersCorrect = 0;
+var score = 0;
 
 
 var allQuestions = [
@@ -52,7 +52,11 @@ function askQuestion() {
 // if currentQuestionindex is undefined, end quiz
   if(!currentQuestion) {
     console.log("Ending Quiz")
-    
+    score = secondsLeft * 1000;
+    console.log(score);
+    stopTimer();
+    // NEED to 
+    // NEED to put score into storage
     return
   }
   // Display my new question text
@@ -70,10 +74,11 @@ function askQuestion() {
     // array.forEach(function(currentValue, index, arr), thisValue)
 }
 // Function to remove buttons
-function removeButtons() {
-  var answerButtons = document.getElementById("answerButtons");
-  answerButtons.replaceChildren();
-}
+// function removeButtons() {
+//   var answerButtons = document.getElementById("answerButtons");
+//   answerButtons.replaceChildren();
+// }
+
 // Function to make buttons populate to HTML
 function makeAnswerButton(choice) {
  
@@ -89,7 +94,7 @@ function answerCheck (event) {
   console.log(event.target.textContent);
     if (event.target.textContent == allQuestions[currentQuestionIndex].answer) {
       // Function for adding to score should go here?
-      answersCorrect++;
+    
       // Also a message saying user is correct
 
       console.log("right");
@@ -101,17 +106,14 @@ function answerCheck (event) {
     
 }
 
-// Checks 
+// Adds the functionality of advancing the questions if the user chooses an incorrect answer
 choiceBtn.addEventListener('click', answerCheck, false, )
 
 
 
 
-// // function for correct answer
-// function userCorrect( ) {
-//   choiceBtn.addEventListener('click', "button", function(event){
 
-var secondsLeft = 75;
+
 
 
 startBtn.addEventListener("click", startTimer); 
@@ -147,14 +149,25 @@ function timer() {
   }, 1000);
 }
 
- function test() {
-  return 2+2;
- }
+function stopTimer() {
+  secondsLeft = 1;
+}
+
+
+
+
+
+
+
+
+//  function test() {
+//   return 2+2;
+//  }
  
-var pikachu = test();
-console.log(pikachu);
-console.log(answersCorrect);
-// askQuestion();
+// var pikachu = test();
+// console.log(pikachu);
+// console.log(answersCorrect);
+// // askQuestion();
 // console.log(askQuestion);
 // console.log(allQuestions[0].question);
 
