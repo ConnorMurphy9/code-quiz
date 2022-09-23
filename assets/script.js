@@ -4,13 +4,17 @@ var secondsLeft = 75;
 var mainElement = document.getElementById("main");
 var startBtn = document.getElementById("startButton");
 var displayQuestion = document.getElementById("questionBox");
-var choiceBtn = document.getElementById("answerButtons")
+var choiceBtn = document.getElementById("answerButtons");
 var currentQuestionIndex = 0;
+var score = 0;
+var user = {
+  name : playerName.value,
+  score : score
+};
 // global var called index that is set to 0 by default, every time they get a question right, increment it
 // move through questions as it increases
-var score = 0;
 
-
+var submitButton = document.querySelector("#submit");
 var allQuestions = [
 
 // 2
@@ -54,6 +58,9 @@ function askQuestion() {
     console.log("Ending Quiz")
     score = secondsLeft * 1000;
     console.log(score);
+    
+    // storeScore();
+    // displayScores();
     stopTimer();
     // NEED to 
     // NEED to put score into storage
@@ -91,7 +98,7 @@ function makeAnswerButton(choice) {
 
 
 function answerCheck (event) {
-  console.log(event.target.textContent);
+ 
     if (event.target.textContent == allQuestions[currentQuestionIndex].answer) {
       // Function for adding to score should go here?
     
@@ -154,9 +161,24 @@ function stopTimer() {
 }
 
 
+function storeScore() {
+  // var scoreStorage = localStorage.setItem("Scores", JSON.stringify(score));
+  //   if (scoreStorage === null) scoreStorage = [];
+  //   scoreStorage.push(score);
+  //   }
 
 
+  //   signUpButton.addEventListener("click", function(event) {
+  //     event.preventDefault();
+  localStorage.setItem("user", JSON.stringify(user));
+console.log(user);
+}
 
+
+      // function displayScores() {
+  
+//   scoreStorage.push(score);
+//     }
 
 
 
@@ -186,4 +208,26 @@ function stopTimer() {
 
 
 
-// When saving items in local storage you will need to retrieve the previously saved scores and combine the new score with the array of previous before the are saved back to local storage
+// When saving items in local storage you will need to retrieve the previously saved scores and combine the new score with the array of previous before they are saved back to local storage
+
+// function addEntry() {
+//   // Parse any JSON previously stored in allEntries
+//   var existingScores = JSON.parse(localStorage.getItem("existingScores"));
+//   if(existingScores == null) existingScores = [];
+//   
+
+
+
+
+
+// var entryTitle = document.getElementById("entryTitle").value;
+//   // var entryText = document.getElementById("entryText").value;
+//   var entry = {
+//       "title": entryTitle,
+//       "text": entryText
+//   };
+//   localStorage.setItem("entry", JSON.stringify(entry));
+//   // Save allEntries back to local storage
+//   existingEntries.push(entry);
+//   localStorage.setItem("allEntries", JSON.stringify(existingEntries));
+// }
