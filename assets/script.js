@@ -121,23 +121,36 @@ function timer() {
 
 // Function to store user's local data for scores and retrieve it
 function storeScore() {
-  userData = {
+  var userData = {
       name : playerName.value,
       userScore : score,
   };
-  if (localStorage.getItem("userData") == null){
-    localStorage.setItem("userData", []);
+  
+  localStorage.setItem('userData', JSON.stringify(userData));
+  
+};
+
+
+
+
+submitButton.addEventListener("click", function(event) {
+  event.preventDefault();
+  storeScore();
+  displayScore();
+  });
+
+  function displayScore() {
+
+    var displayScore = JSON.parse(localStorage.getItem("userData"));
+// Check if data is returned, if not exit out of the function
+if (displayScore !== null) {
+  document.getElementById("userScoreDisplay").innerHTML = "Your score is " + displayScore.userScore + ", " + displayScore.name + ". Thank you for taking this quiz!";
+
+  } else {
+    return;
   }
 
-localStorage.setItem('userData', JSON.stringify(userData));
-var displayScore = JSON.parse(localStorage.getItem(userData));
-console.log(userData);
-console.log(userData[0]);
-console.log(userData[0].name);
-console.log(userData[0].userScore);
-console.log(userData[1]);
-userScoreDisplayEl.textContent = displayScore;
-userData.push(userData);
+   
 
-};
+  };
 
