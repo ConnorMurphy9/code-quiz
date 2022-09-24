@@ -119,7 +119,7 @@ function timer() {
   }, 1000);
 };
 
-// Function to store user's local data for scores and retrieve it
+// Function to store user's score data to local storage.
 function storeScore() {
   var userData = {
       name : playerName.value,
@@ -139,18 +139,14 @@ submitButton.addEventListener("click", function(event) {
   displayScore();
   });
 
+  // Function that will display user's score when the submit score button is clicked.
   function displayScore() {
+   var displayScore = JSON.parse(localStorage.getItem("userData"));
+// Check if data is returned, if not exit out of the function.
+   if (displayScore !== null) {
+    document.getElementById("userScoreDisplay").innerHTML = "Your score is " + displayScore.userScore + ", " + displayScore.name + ". Thank you for taking this quiz!";
 
-    var displayScore = JSON.parse(localStorage.getItem("userData"));
-// Check if data is returned, if not exit out of the function
-if (displayScore !== null) {
-  document.getElementById("userScoreDisplay").innerHTML = "Your score is " + displayScore.userScore + ", " + displayScore.name + ". Thank you for taking this quiz!";
-
-  } else {
-    return;
-  }
-
-   
-
-  };
+  }else {
+   return;
+  }};
 
