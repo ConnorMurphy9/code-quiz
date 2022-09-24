@@ -50,17 +50,13 @@ function askQuestion() {
   var currentQuestion = allQuestions[currentQuestionIndex];
 // if currentQuestionindex is undefined, end quiz
   if(!currentQuestion) {
-    displayQuestion.textContent = "GAMEOVER"
+    displayQuestion.textContent = "GAMEOVER--thank you for playing!";
     score = secondsLeft * 1000;
     console.log(score);
     submitScoreFormEl.style.display = "block";
-    // displayScores();
-    stopTimer();
-    storeScore();
-    
-    // NEED to put score into storage
     return
   };
+
   // Display my new question text
   document.getElementById("questionBox").textContent = currentQuestion.question;
 
@@ -107,8 +103,7 @@ function startTimer() {
     startBtn.style.display = "none"; 
     timer();
     makeAnswerButton();
-    askQuestion();
-    
+    askQuestion(); 
 };
 
 // This is function that describes the timer.
@@ -117,42 +112,33 @@ function timer() {
   var timerInterval = setInterval(function() {
     secondsLeft--;
     timerElement.textContent = secondsLeft + " seconds left.";
-
-    if(secondsLeft <= 0) {
+    if(secondsLeft <= 0 || !allQuestions[currentQuestionIndex]) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
-      // Calls function to create and append image
-    //   sendMessage();
     }
-
   }, 1000);
 };
 
-function stopTimer() {
-  secondsLeft = 1;
-};
-
-
+// Function to store user's local data for scores and retrieve it
 function storeScore() {
   userData = {
       name : playerName.value,
-      userScore : score
+      userScore : score,
   };
   if (localStorage.getItem("userData") == null){
-    localStorage.setItem("userData")
+    localStorage.setItem("userData", []);
   }
-  // localStorage.setItem("userData", JSON.stringify(userData));
-  //   if (userData === null) userData = [];
-  //   // var newScoreStorage = scoreStorage.push(userData);
+  // else {userData = JSON.parse(localStorage.getItem())}
+// var prevData = JSON.parse(localStorage.getItem('userData'));
+// prevData.push(userData);
 
+localStorage.setItem('userData', JSON.stringify('userData'));
+var userData = JSON.parse(localStorage.getItem('userData'));
 
-  //     event.preventDefault();
-  // localStorage.parseit("userData", JSON.stringify(userData));
 console.log(userData);
-displayUserScore ();
-};
-
-function displayUserScore () {
-  userScoreDisplayEl = JSON.parse(localStorage.getItem("userData"));
-  // document.querySelector("userScoreDisplay").textContent = userData;
+console.log(userData[0]);
+console.log(userData[0].name);
+console.log(userData[0].userScore);
+console.log(userData[1]);
+userScoreDisplayEl.textContent = userData;
 };
