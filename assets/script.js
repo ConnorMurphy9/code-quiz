@@ -132,13 +132,46 @@ function storeScore() {
 // var prevData = JSON.parse(localStorage.getItem('userData'));
 // prevData.push(userData);
 
-localStorage.setItem('userData', JSON.stringify('userData'));
-var userData = JSON.parse(localStorage.getItem('userData'));
-
+localStorage.setItem('userData', JSON.stringify(userData));
+var displayScore = JSON.parse(localStorage.getItem(userData));
 console.log(userData);
 console.log(userData[0]);
 console.log(userData[0].name);
 console.log(userData[0].userScore);
 console.log(userData[1]);
-userScoreDisplayEl.textContent = userData;
+userScoreDisplayEl.textContent = displayScore;
+userData.push(userData);
+
 };
+
+
+// function saveLastGrade() {
+//   // Save related form data as an object
+//   var studentGrade = {
+//     student: student.value,
+//     grade: grade.value,
+//     comment: comment.value.trim()
+//   };
+//   // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
+//   localStorage.setItem("studentGrade", JSON.stringify(studentGrade));
+// }
+
+
+// function renderLastGrade() {
+//   // Use JSON.parse() to convert text to JavaScript object
+//   var lastGrade = JSON.parse(localStorage.getItem("studentGrade"));
+//   // Check if data is returned, if not exit out of the function
+//   if (lastGrade !== null) {
+//   document.getElementById("saved-name").innerHTML = lastGrade.student;
+//   document.getElementById("saved-grade").innerHTML = lastGrade.grade;
+//   document.getElementById("saved-comment").innerHTML = lastGrade.comment;
+//   } else {
+//     return;
+//   }
+// }
+
+submitButton.addEventListener("click", function(event) {
+  event.preventDefault();
+  saveLastGrade();
+  renderLastGrade();
+  });
